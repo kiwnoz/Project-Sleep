@@ -6,10 +6,7 @@ import '../services/sleep_api_service.dart';
 import '../services/history_service.dart';
 import 'result_screen.dart';
 
-/// หน้าระหว่างรอผลจาก API (ตอนนี้คือ Mock, ทีหลังจะเป็น FastAPI จริง)
-///
-/// จุดเดียวที่ต้องแก้ตอนสลับจาก Mock ไปของจริง: บรรทัด SleepApiService
-/// ด้านล่างนี้ (เปลี่ยนจาก MockSleepApiService() เป็น RealSleepApiService(...))
+/// หน้าระหว่างรอผลจาก FastAPI จริง
 class LoadingScreen extends StatefulWidget {
   final SleepAssessmentInput input;
 
@@ -20,9 +17,11 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  // TODO: เมื่อเพื่อนส่ง FastAPI จริงมา ให้เปลี่ยนบรรทัดนี้เป็น
-  // final SleepApiService _api = RealSleepApiService(baseUrl: '...');
-  final SleepApiService _api = MockSleepApiService();
+  static const _apiBaseUrl = String.fromEnvironment(
+    'SLEEP_API_BASE_URL',
+    defaultValue: 'http://10.0.2.2:8000',
+  );
+  final SleepApiService _api = RealSleepApiService(baseUrl: _apiBaseUrl);
   final HistoryService _historyService = HistoryService();
 
   String? _errorMessage;

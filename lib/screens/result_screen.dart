@@ -235,15 +235,17 @@ class _ResultScreenState extends State<ResultScreen>
                           result.quality,
                           style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: color),
                         ),
-                        if (result.confidence != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 2),
-                            child: Text(
-                              // % ตัวเลขก็ไล่ขึ้นตาม animation ไปด้วย ไม่ใช่โผล่มาทันที
-                              '${(_progressAnimation.value * 100).round()}% confidence',
-                              style: TextStyle(fontSize: 11.5, color: AppTheme.textMutedColor(context)),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2),
+                          child: Text(
+                            '${(_progressAnimation.value * 100).round()}/100',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.textPrimaryColor(context),
                             ),
                           ),
+                        ),
                       ],
                     ),
                   ],
